@@ -51,12 +51,7 @@ const productCategories = [
     icon: Box,
     image: 'https://images.unsplash.com/photo-1558223126-628d01799738?q=80&w=800&auto=format&fit=crop'
   },
-  {
-    id: 4,
-    title: 'Nano Banana Tech',
-    icon: Zap,
-    image: '/industrial_nano_banana_tech.png'
-  },
+
   {
     id: 5,
     title: 'Sarf Malzemeleri',

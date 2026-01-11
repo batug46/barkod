@@ -225,10 +225,10 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-slate-50 gap-8">
-            <span className="text-[10px] font-black text-slate-300 tracking-[0.5em] uppercase">© 2026 Barkod.com Sistemleri // Tüm Veriler Güncel</span>
+            <span className="text-[10px] font-black text-slate-300 tracking-[0.5em] uppercase">© 2026 Örnek Yazı // Örnek Yazı</span>
             <div className="flex gap-12 text-[10px] font-black text-slate-300 uppercase tracking-widest">
-              <span>Güvenli İşlem</span>
-              <span>AES-256 Doğrulandı</span>
+              <span>Örnek Yazı</span>
+              <span>Örnek Yazı</span>
             </div>
           </div>
         </div>

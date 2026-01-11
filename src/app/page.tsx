@@ -27,7 +27,8 @@ import {
   Facebook,
   Youtube,
   MapPin,
-  Mail
+  Mail,
+  Menu
 } from 'lucide-react'
 
 // Mock Veriler - Updated with more reliable stock images
@@ -77,6 +78,7 @@ const serviceList = [
 
 export default function Home() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <main className="min-h-screen bg-white text-[#001220] font-sans selection:bg-[#001f3f] selection:text-white overflow-x-hidden">
@@ -142,15 +144,64 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="btn-nav-auth text-[#001220] bg-transparent border border-[#001220]/5 hover:bg-[#001220]/5 flex items-center gap-2">
+              <button className="hidden sm:flex btn-nav-auth text-[#001220] bg-transparent border border-[#001220]/5 hover:bg-[#001220]/5 items-center gap-2">
                 <Lock className="w-3.5 h-3.5" /> Giriş
               </button>
-              <button className="btn-nav-auth bg-[#001220] text-white flex items-center gap-2">
+              <button className="hidden sm:flex btn-nav-auth bg-[#001220] text-white items-center gap-2">
                 <UserPlus className="w-3.5 h-3.5" /> Kayıt
+              </button>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                className="lg:hidden p-2 text-[#001220]"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="lg:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-xl border-b border-[#001220]/5 overflow-hidden shadow-2xl"
+            >
+              <div className="px-6 py-8 flex flex-col gap-6">
+                <a href="#" className="text-sm font-black uppercase tracking-widest text-[#001220]">Ana Sayfa</a>
+
+                {/* Mobile Products */}
+                <div className="space-y-4">
+                  <div className="text-sm font-black uppercase tracking-widest text-[#001220]/50">Ürünlerimiz</div>
+                  <div className="grid grid-cols-2 gap-3 pl-4">
+                    {productCategories.map((item) => (
+                      <div key={item.id} className="flex items-center gap-2 text-[#001f3f]">
+                        <item.icon className="w-4 h-4" />
+                        <span className="text-xs font-bold uppercase">{item.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <a href="#" className="text-sm font-black uppercase tracking-widest text-[#001220]">Hizmetlerimiz</a>
+                <a href="#" className="text-sm font-black uppercase tracking-widest text-[#001220]">Barkod Rehberi</a>
+
+                <div className="pt-6 border-t border-[#001220]/10 flex flex-col gap-3">
+                  <button className="w-full py-4 text-[#001220] border border-[#001220]/10 rounded-xl font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+                    <Lock className="w-4 h-4" /> Giriş Yap
+                  </button>
+                  <button className="w-full py-4 bg-[#001220] text-white rounded-xl font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+                    <UserPlus className="w-4 h-4" /> Kayıt Ol
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero */}
@@ -196,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* Ecosystem Section - Even Smaller Cards */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-16 md:py-24 px-6 bg-white">
         <div className="max-w-[1600px] mx-auto">
           <div className="flex justify-between items-end mb-16">
             <div>
@@ -256,7 +307,7 @@ export default function Home() {
       </section>
 
       {/* Footer - Premium Mesh Design with Screenshot Content */}
-      <footer className="bg-white border-t border-[#001220]/5 pt-32 pb-16 px-6 relative overflow-hidden">
+      <footer className="bg-white border-t border-[#001220]/5 pt-16 md:pt-32 pb-16 px-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#001220]/[0.01] blur-[150px] -z-10" />
 
         <div className="max-w-7xl mx-auto">
